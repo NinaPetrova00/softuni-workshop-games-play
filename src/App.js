@@ -7,11 +7,11 @@ import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import { Create } from './components/Create/Create';
 import { Catalogue } from './components/Catalogue/Catalogue';
-import { Routes, Route } from 'react-router-dom'
 import { Details } from './components/Details/Details';
+import * as gameService from './services/gameService';
 
 import { useEffect, useState } from "react";
-import * as gameService from './services/gameService';
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
     const [games, setGames] = useState([]);
@@ -32,9 +32,9 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route paht="/create" element={<Create />} />
-                    <Route path="/edit" element={<Edit />} />                 
+                    <Route path="/edit" element={<Edit />} />
                     <Route path="/catalogue" element={<Catalogue games={games} />} />
-                    <Route path="/catalogue/:gameId" element={<Details />} />
+                    <Route path="/catalogue/:gameId" element={<Details games={games} />} />
                 </Routes>
             </main>
         </div>

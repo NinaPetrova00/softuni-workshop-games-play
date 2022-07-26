@@ -1,4 +1,4 @@
-import { CatalogueItem } from "./CatalogueItem";
+import { CatalogueItem } from "./CatalogueItem/CatalogueItem";
 
 export const Catalogue = ({ games }) => {
     return (
