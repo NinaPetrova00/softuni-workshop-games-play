@@ -1,9 +1,32 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const Details = ({ games }) => {
+export const Details = ({
+    games,
+    addComment
+}) => {
     const { gameId } = useParams();
+    const [comment, setComment] = useState({
+        username: '',
+        comment: ''
+    });
 
     const game = games.find(g => g._id == gameId);
+
+    const addCommentHandler = (ev) => {
+        ev.preventDefault();
+
+        const userComment = `${comment.username}: ${comment.comment}`;
+        
+        addComment(gameId, userComment);
+    };
+
+    const onChange = (ev) => {
+        setComment(oldState => ({
+            ...oldState,
+            [ev.target.name]: ev.target.value
+        }));
+    };
 
     return (
         <section id="game-details">
@@ -41,23 +64,32 @@ export const Details = ({ games }) => {
                     </a>
                 </div>
             </div>
-            {/* Bonus */}
-            {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}
-            {/* <article className="create-comment">
+
+            <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form">
+                <form className="form" onSubmit={addCommentHandler}>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="John Doe"
+                        onChange={onChange}
+                        value={comment.username}
+                    />
+
                     <textarea
                         name="comment"
                         placeholder="Comment......"
-                        defaultValue={""}
+                        onChange={onChange}
+                        value={comment.comment}
                     />
+
                     <input
                         className="btn submit"
                         type="submit"
-                        defaultValue="Add Comment"
+                        value="Add Comment"
                     />
                 </form>
-            </article> */}
+            </article>
         </section>
     );
 };

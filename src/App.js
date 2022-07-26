@@ -16,6 +16,20 @@ import { Routes, Route } from 'react-router-dom'
 function App() {
     const [games, setGames] = useState([]);
 
+    const addComment = (gameId, comment) => {
+        setGames(oldState => {
+            const game = oldState.find(g => g._id == gameId);
+
+            const comments = game.comments || [];
+            comments.push(comment);
+
+            return [
+                ...oldState.filter(g => g._id !== gameId),
+                { ...game, comments }
+            ]
+        });
+    };
+
     useEffect(() => {
         gameService.getAll()
             .then(result => {
@@ -34,7 +48,7 @@ function App() {
                     <Route paht="/create" element={<Create />} />
                     <Route path="/edit" element={<Edit />} />
                     <Route path="/catalogue" element={<Catalogue games={games} />} />
-                    <Route path="/catalogue/:gameId" element={<Details games={games} />} />
+                    <Route path="/catalogue/:gameId" element={<Details games={games} addComment={addComment} />} />
                 </Routes>
             </main>
         </div>
