@@ -23,7 +23,8 @@ export const Home = () => {
                 <h1>Latest Games</h1>
                 {games.length > 0
                     ? games.map(g => <LatestGame key={g._id} game={g} />)
-                    : <p className="no-articles">No games yet</p>}
+                    : <p className="no-articles">No games yet</p>
+                }
             </div>
         </section>
     );

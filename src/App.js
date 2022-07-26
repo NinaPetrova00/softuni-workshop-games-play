@@ -7,7 +7,7 @@ import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import { Create } from './components/Create/Create';
 import { Catalogue } from './components/Catalogue/Catalogue';
-
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
     return (
@@ -15,10 +15,12 @@ function App() {
             <Header />
 
             {/* Main Content */}
-            <main id="main-content"></main>
+            <main id="main-content">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                </Routes>
+            </main>
 
-            {/*Home Page*/}
-            <Home />
 
             {/* Login Page ( Only for Guest users ) */}
             <Login />
