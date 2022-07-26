@@ -21,11 +21,9 @@ export const Home = () => {
             <img src="./images/four_slider_img01.png" alt="hero" />
             <div id="home-page">
                 <h1>Latest Games</h1>
-                {/* Display div: with information about every game (if any) */}
-
-                {games.map(g => <LatestGame game={g} />)}
-                {/* Display paragraph: If there is no games  */}
-                <p className="no-articles">No games yet</p>
+                {games.length > 0
+                    ? games.map(g => <LatestGame key={g._id} game={g} />)
+                    : <p className="no-articles">No games yet</p>}
             </div>
         </section>
     );
