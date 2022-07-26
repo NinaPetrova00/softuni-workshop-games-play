@@ -32,13 +32,13 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route paht="/create" element={<Create />} />
-                    <Route path="/edit" element={<Edit />} />
-                    <Route path="/details" element={<Details />} />
+                    <Route path="/edit" element={<Edit />} />                 
                     <Route path="/catalogue" element={<Catalogue games={games} />} />
+                    <Route path="/catalogue/:gameId" element={<Details />} />
                 </Routes>
             </main>
         </div>
     );
-}
+};
 
 export default App;
