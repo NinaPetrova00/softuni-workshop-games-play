@@ -1,9 +1,34 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+
+import * as authService from '../../services/authService';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const Login = () => {
+    const { userLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const onSubmit = (ev) => {
+        ev.preventDefault();
+
+        const {
+            email,
+            password
+        } = Object.fromEntries(new FormData(ev.target));
+
+        authService.login(email, password)
+            .then(authData => {
+                userLogin(authData);
+                navigate('/');
+            })
+            .catch(() => {
+                navigate('/404');
+            });
+    };
+
     return (
         <section id="login-page" className="auth">
-            <form id="login">
+            <form id="login" onSubmit={onSubmit}>
                 <div className="container">
                     <div className="brand-logo" />
                     <h1>Login</h1>
